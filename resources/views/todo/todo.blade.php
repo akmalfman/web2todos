@@ -17,6 +17,9 @@
         @foreach ($todos as $value)
             <div class="card">
                 <div class="card-body">
+                    <p>{{ $value->category }}</p>
+                    <p>{{ $value->name }}</p>
+                    <p>{{ $value->email }}</p>
                     <p>{{ $value->title }}</p>
                     <p>{{ $value->description }}</p>
                     <a href="/todo/edit/{{ $value->id }}" class="btn btn-success">Ubah</a>
