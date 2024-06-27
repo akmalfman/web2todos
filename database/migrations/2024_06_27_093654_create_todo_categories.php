@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('todos', function (Blueprint $table) {
+        Schema::create('todo_categories', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('todo_category_id');
             $table->bigInteger('user_id');
-            $table->string('title');
-            $table->string('description');
+            $table->string('category');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('todos');
+        Schema::dropIfExists('todo_categories');
     }
 };

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Todo;
+use Illuminate\Support\Facades\DB;
 
 class TodoController extends Controller
 {
@@ -12,6 +13,7 @@ class TodoController extends Controller
      */
     public function index()
     {
+        // $todos = DB::table('todos')->get();
         $todos = Todo::get();
         // dd($todos);
         return view('todo.todo', compact('todos'));
