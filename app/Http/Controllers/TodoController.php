@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Todo;
 use App\Models\TodoCategory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class TodoController extends Controller
@@ -44,7 +45,7 @@ class TodoController extends Controller
 
         $value = [
             'todo_category_id' => $request->todo_category_id,
-            'user_id' => 1,
+            'user_id' => Auth::user()->id,
             'title' => $request->title,
             'description' => $request->description
         ];
@@ -67,19 +68,20 @@ class TodoController extends Controller
     public function edit(string $id)
     {
         $todo = Todo::find($id);
+        $todocategories = TodoCategory::all();
         // dd($todo);
-        return view('todo.edit', compact('todo'));
+        return view('todo.edit', compact('todo', 'todocategories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
 
         $value = [
             'todo_category_id' => $request->todo_category_id,
-            'user_id' => 1,
+            'user_id' => Auth::user()->id,
             'title' => $request->title,
             'description' => $request->description,
         ];
