@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\APITodoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +17,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::prefix('todo')->group(function () {
+    Route::get('/', [APITodoController::class, 'index']);
+    Route::delete('/delete/{id}', [APITodoController::class, 'destroy']);
+    Route::post('/store', [APITodoController::class, 'store']);
+    Route::put('/update/{id}', [APITodoController::class, 'update']);
 });
