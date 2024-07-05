@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TodoController;
 use App\Http\Controllers\UserController;
@@ -47,5 +48,16 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/delete/{id}', [TodoController::class, 'destroy']);
         Route::post('/store', [TodoController::class, 'store']);
         Route::post('/update/{id}', [TodoController::class, 'update']);
+    });
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('todocategory')->group(function () {
+        Route::get('/', [CategoryController::class, 'index']);
+        // Route::get('/create', [TodoController::class, 'create']);
+        // Route::get('/edit/{id}', [TodoController::class, 'edit']);
+        // Route::get('/delete/{id}', [TodoController::class, 'destroy']);
+        // Route::post('/store', [TodoController::class, 'store']);
+        // Route::post('/update/{id}', [TodoController::class, 'update']);
     });
 });
