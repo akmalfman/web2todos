@@ -35,7 +35,7 @@ class UserController extends Controller
         }
 
         // dd($user, "Gagal Login");
-        return redirect('dashboard');
+        return redirect('user/login')->with('error', 'Login Gagal. Silahkan coba lagi');
     }
 
     public function register()

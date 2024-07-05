@@ -8,11 +8,15 @@ use App\Models\TodoCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+use function Laravel\Prompts\select;
+
 class TodoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         // $todos = DB::table('todos')
@@ -21,6 +25,15 @@ class TodoController extends Controller
         //     ->get();
         $todos = Todo::join('todo_categories', 'todo_categories.id', '=', 'todos.todo_category_id')
             ->join('users', 'users.id', '=', 'todos.user_id')
+            ->select(
+                'users.*',
+                'todo_categories.*',
+                'todos.id as todo_id',
+                'todos.todo_category_id',
+                'todos.user_id',
+                'todos.title',
+                'todos.description',
+            )
             ->get();
         // dd($todos);
         return view('todo.todo', compact('todos'));
